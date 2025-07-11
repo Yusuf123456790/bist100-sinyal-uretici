@@ -1,0 +1,2286 @@
+import numpy as np
+import pandas as pd
+import yfinance as yf
+import pandas_datareader.data as web
+import pandas_ta as ta
+import matplotlib.pyplot as plt
+from datetime import date
+import datetime
+from datetime import date
+from datetime import timedelta
+plt.style.use('fivethirtyeight')
+yf.pdr_override()
+
+startdate = str(datetime.datetime.now() - datetime.timedelta(120)).split()[0]
+WhereDate = str(datetime.datetime.now() - datetime.timedelta(1)).split()[0]
+WhereDate1 = str(datetime.datetime.now() - datetime.timedelta(2)).split()[0]
+date_format = "%Y-%m-%d"
+WhereDate = datetime.datetime.strptime(WhereDate, date_format)
+end_date = date.today()
+
+#########################       ADESE Gayrimenkul Yatırım Şirketi (ADESE.IS)       #########################
+
+stocksymbols = ['ADESE.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ADESE=pd.DataFrame(data1)
+ADESE = ADESE[['Close']]
+
+ADESE['Stock Name'] = 'ADESE Gayrimenkul Yatırım Şirketi'
+ADESE['Stock Code'] = 'ADESE'
+
+ADESE['Close Today'] = ADESE['Close'].iloc[-1]
+ADESE.reset_index(inplace=True)
+ADESE['Date'] = pd.to_datetime(ADESE['Date']).dt.date
+ADESE["previous_days_stock_price"] = ADESE["Close"].shift(1)
+ADESE['Oran'] = ((ADESE['Close'] / ADESE['previous_days_stock_price'])-1)
+
+#########################       AG Anadolu Grup Holding (AGHOL.IS)       #########################
+
+stocksymbols = ['AGHOL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+AGHOL=pd.DataFrame(data1)
+AGHOL = AGHOL[['Close']]
+
+AGHOL['Stock Name'] = 'AG Anadolu Grup Holding'
+AGHOL['Stock Code'] = 'AGHOL'
+
+AGHOL['Close Today'] = AGHOL['Close'].iloc[-1]
+AGHOL.reset_index(inplace=True)
+AGHOL['Date'] = pd.to_datetime(AGHOL['Date']).dt.date
+AGHOL["previous_days_stock_price"] = AGHOL["Close"].shift(1)
+AGHOL['Oran'] = ((AGHOL['Close'] / AGHOL['previous_days_stock_price'])-1)
+
+#########################       AKBANK TAS (AKBNK.IS)       #########################
+
+stocksymbols = ['AKBNK.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+AKBNK=pd.DataFrame(data1)
+AKBNK = AKBNK[['Close']]
+
+AKBNK['Stock Name'] = 'AKBANK TAS'
+AKBNK['Stock Code'] = 'AKBNK'
+
+AKBNK['Close Today'] = AKBNK['Close'].iloc[-1]
+AKBNK.reset_index(inplace=True)
+AKBNK['Date'] = pd.to_datetime(AKBNK['Date']).dt.date
+AKBNK["previous_days_stock_price"] = AKBNK["Close"].shift(1)
+AKBNK['Oran'] = ((AKBNK['Close'] / AKBNK['previous_days_stock_price'])-1)
+
+#########################       AKFEN Gayrimenkul Yatırım Ortaklığı A.Ş. (AKFGY.IS)       #########################
+
+stocksymbols = ['AKFGY.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+AKFGY=pd.DataFrame(data1)
+AKFGY = AKFGY[['Close']]
+
+AKFGY['Stock Name'] = 'AKFEN Gayrimenkul Yatırım Ortaklığı A.Ş.'
+AKFGY['Stock Code'] = 'AKFGY'
+
+AKFGY['Close Today'] = AKFGY['Close'].iloc[-1]
+AKFGY.reset_index(inplace=True)
+AKFGY['Date'] = pd.to_datetime(AKFGY['Date']).dt.date
+AKFGY["previous_days_stock_price"] = AKFGY["Close"].shift(1)
+AKFGY['Oran'] = ((AKFGY['Close'] / AKFGY['previous_days_stock_price'])-1)
+
+#########################       AKSA Enerji Üretim A.Ş. (AKSEN.IS)       #########################
+
+stocksymbols = ['AKSEN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+AKSEN=pd.DataFrame(data1)
+AKSEN = AKSEN[['Close']]
+
+AKSEN['Stock Name'] = 'AKSA Enerji Üretim A.Ş.'
+AKSEN['Stock Code'] = 'AKSEN'
+
+AKSEN['Close Today'] = AKSEN['Close'].iloc[-1]
+AKSEN.reset_index(inplace=True)
+AKSEN['Date'] = pd.to_datetime(AKSEN['Date']).dt.date
+AKSEN["previous_days_stock_price"] = AKSEN["Close"].shift(1)
+AKSEN['Oran'] = ((AKSEN['Close'] / AKSEN['previous_days_stock_price'])-1)
+
+#########################       ALARKO Gayrimenkul Yatırım A.Ş. (ALGYO.IS)       #########################
+
+stocksymbols = ['ALGYO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ALGYO=pd.DataFrame(data1)
+ALGYO = ALGYO[['Close']]
+
+ALGYO['Stock Name'] = 'ALARKO Gayrimenkul Yatırım A.Ş.'
+ALGYO['Stock Code'] = 'ALGYO'
+
+ALGYO['Close Today'] = ALGYO['Close'].iloc[-1]
+ALGYO.reset_index(inplace=True)
+ALGYO['Date'] = pd.to_datetime(ALGYO['Date']).dt.date
+ALGYO["previous_days_stock_price"] = ALGYO["Close"].shift(1)
+ALGYO['Oran'] = ((ALGYO['Close'] / ALGYO['previous_days_stock_price'])-1)
+
+#########################       ALARKO Holding A.Ş. (ALARK.IS)       #########################
+
+stocksymbols = ['ALARK.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ALARK=pd.DataFrame(data1)
+ALARK = ALARK[['Close']]
+
+ALARK['Stock Name'] = 'ALARKO Holding A.Ş.'
+ALARK['Stock Code'] = 'ALARK'
+
+ALARK['Close Today'] = ALARK['Close'].iloc[-1]
+ALARK.reset_index(inplace=True)
+ALARK['Date'] = pd.to_datetime(ALARK['Date']).dt.date
+ALARK["previous_days_stock_price"] = ALARK["Close"].shift(1)
+ALARK['Oran'] = ((ALARK['Close'] / ALARK['previous_days_stock_price'])-1)
+
+#########################       ALBARAKA Türk Katılım Bankası A.Ş. (ALBRK.IS)       #########################
+
+stocksymbols = ['ALBRK.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ALBRK=pd.DataFrame(data1)
+ALBRK = ALBRK[['Close']]
+
+ALBRK['Stock Name'] = 'ALBARAKA Türk Katılım Bankası A.Ş.'
+ALBRK['Stock Code'] = 'ALBRK'
+
+ALBRK['Close Today'] = ALBRK['Close'].iloc[-1]
+ALBRK.reset_index(inplace=True)
+ALBRK['Date'] = pd.to_datetime(ALBRK['Date']).dt.date
+ALBRK["previous_days_stock_price"] = ALBRK["Close"].shift(1)
+ALBRK['Oran'] = ((ALBRK['Close'] / ALBRK['previous_days_stock_price'])-1)
+
+#########################       AKSA Akrilik Kimya Sanayi A.Ş. (AKSA.IS)       #########################
+
+stocksymbols = ['AKSA.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+AKSA=pd.DataFrame(data1)
+AKSA = AKSA[['Close']]
+
+AKSA['Stock Name'] = 'AKSA Akrilik Kimya Sanayi A.Ş.'
+AKSA['Stock Code'] = 'AKSA'
+
+AKSA['Close Today'] = AKSA['Close'].iloc[-1]
+AKSA.reset_index(inplace=True)
+AKSA['Date'] = pd.to_datetime(AKSA['Date']).dt.date
+AKSA["previous_days_stock_price"] = AKSA["Close"].shift(1)
+AKSA['Oran'] = ((AKSA['Close'] / AKSA['previous_days_stock_price'])-1)
+
+#########################       ALKİM Alkali Kimya A.Ş. (ALKIM.IS)       #########################
+
+stocksymbols = ['ALKIM.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ALKIM=pd.DataFrame(data1)
+ALKIM = ALKIM[['Close']]
+
+ALKIM['Stock Name'] = 'ALKİM Alkali Kimya A.Ş.'
+ALKIM['Stock Code'] = 'ALKIM'
+
+ALKIM['Close Today'] = ALKIM['Close'].iloc[-1]
+ALKIM.reset_index(inplace=True)
+ALKIM['Date'] = pd.to_datetime(ALKIM['Date']).dt.date
+ALKIM["previous_days_stock_price"] = ALKIM["Close"].shift(1)
+ALKIM['Oran'] = ((ALKIM['Close'] / ALKIM['previous_days_stock_price'])-1)
+
+#########################       ANADOLU Efes Biracılık ve Malt Sanayi A.Ş. (AEFES.IS)       #########################
+
+stocksymbols = ['AEFES.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+AEFES=pd.DataFrame(data1)
+AEFES = AEFES[['Close']]
+
+AEFES['Stock Name'] = 'ANADOLU Efes Biracılık ve Malt Sanayi A.Ş.'
+AEFES['Stock Code'] = 'AEFES'
+
+AEFES['Close Today'] = AEFES['Close'].iloc[-1]
+AEFES.reset_index(inplace=True)
+AEFES['Date'] = pd.to_datetime(AEFES['Date']).dt.date
+AEFES["previous_days_stock_price"] = AEFES["Close"].shift(1)
+AEFES['Oran'] = ((AEFES['Close'] / AEFES['previous_days_stock_price'])-1)
+
+#########################       ARÇELİK A.Ş. (ARCLK.IS)       #########################
+
+stocksymbols = ['ARCLK.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ARCLK=pd.DataFrame(data1)
+ARCLK = ARCLK[['Close']]
+
+ARCLK['Stock Name'] = 'ARÇELİK A.Ş.'
+ARCLK['Stock Code'] = 'ARCLK'
+
+ARCLK['Close Today'] = ARCLK['Close'].iloc[-1]
+ARCLK.reset_index(inplace=True)
+ARCLK['Date'] = pd.to_datetime(ARCLK['Date']).dt.date
+ARCLK["previous_days_stock_price"] = ARCLK["Close"].shift(1)
+ARCLK['Oran'] = ((ARCLK['Close'] / ARCLK['previous_days_stock_price'])-1)
+
+#########################       ASELSAN Elektronik Sanayi ve Ticaret A.Ş. (ASELS.IS)       #########################
+
+stocksymbols = ['ASELS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ASELS=pd.DataFrame(data1)
+ASELS = ASELS[['Close']]
+
+ASELS['Stock Name'] = 'ASELSAN Elektronik Sanayi ve Ticaret A.Ş.'
+ASELS['Stock Code'] = 'ASELS'
+
+ASELS['Close Today'] = ASELS['Close'].iloc[-1]
+ASELS.reset_index(inplace=True)
+ASELS['Date'] = pd.to_datetime(ASELS['Date']).dt.date
+ASELS["previous_days_stock_price"] = ASELS["Close"].shift(1)
+ASELS['Oran'] = ((ASELS['Close'] / ASELS['previous_days_stock_price'])-1)
+
+#########################       AYDEM Yenilenebilir Enerji Dağıtım Şirketi (AYDEM.IS)       #########################
+
+stocksymbols = ['AYDEM.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+AYDEM=pd.DataFrame(data1)
+AYDEM = AYDEM[['Close']]
+
+AYDEM['Stock Name'] = 'AYDEM Yenilenebilir Enerji Dağıtım Şirketi'
+AYDEM['Stock Code'] = 'AYDEM'
+
+AYDEM['Close Today'] = AYDEM['Close'].iloc[-1]
+AYDEM.reset_index(inplace=True)
+AYDEM['Date'] = pd.to_datetime(AYDEM['Date']).dt.date
+AYDEM["previous_days_stock_price"] = AYDEM["Close"].shift(1)
+AYDEM['Oran'] = ((AYDEM['Close'] / AYDEM['previous_days_stock_price'])-1)
+
+#########################       BAGFAS Bandırma Gübre Fabrikaları A.Ş. (BAGFS.IS)       #########################
+
+stocksymbols = ['BAGFS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+BAGFS=pd.DataFrame(data1)
+BAGFS = BAGFS[['Close']]
+
+BAGFS['Stock Name'] = 'BAGFAS Bandırma Gübre Fabrikaları A.Ş.'
+BAGFS['Stock Code'] = 'BAGFS'
+
+BAGFS['Close Today'] = BAGFS['Close'].iloc[-1]
+BAGFS.reset_index(inplace=True)
+BAGFS['Date'] = pd.to_datetime(BAGFS['Date']).dt.date
+BAGFS["previous_days_stock_price"] = BAGFS["Close"].shift(1)
+BAGFS['Oran'] = ((BAGFS['Close'] / BAGFS['previous_days_stock_price'])-1)
+
+#########################       BERA Holding A.Ş. (BERA.IS)       #########################
+
+stocksymbols = ['BERA.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+BERA=pd.DataFrame(data1)
+BERA = BERA[['Close']]
+
+BERA['Stock Name'] = 'BERA Holding A.Ş.'
+BERA['Stock Code'] = 'BERA'
+
+BERA['Close Today'] = BERA['Close'].iloc[-1]
+BERA.reset_index(inplace=True)
+BERA['Date'] = pd.to_datetime(BERA['Date']).dt.date
+BERA["previous_days_stock_price"] = BERA["Close"].shift(1)
+BERA['Oran'] = ((BERA['Close'] / BERA['previous_days_stock_price'])-1)
+
+#########################       BIM Birleşik Mağazaları A.Ş. (BIMAS.IS)       #########################
+
+stocksymbols = ['BIMAS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+BIMAS=pd.DataFrame(data1)
+BIMAS = BIMAS[['Close']]
+
+BIMAS['Stock Name'] = 'BIM Birleşik Mağazaları A.Ş.'
+BIMAS['Stock Code'] = 'BIMAS'
+
+BIMAS['Close Today'] = BIMAS['Close'].iloc[-1]
+BIMAS.reset_index(inplace=True)
+BIMAS['Date'] = pd.to_datetime(BIMAS['Date']).dt.date
+BIMAS["previous_days_stock_price"] = BIMAS["Close"].shift(1)
+BIMAS['Oran'] = ((BIMAS['Close'] / BIMAS['previous_days_stock_price'])-1)
+
+#########################       BORUSAN Yatırım ve Pazarlama A.Ş. (BRYAT.IS)       #########################
+
+stocksymbols = ['BRYAT.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+BRYAT=pd.DataFrame(data1)
+BRYAT = BRYAT[['Close']]
+
+BRYAT['Stock Name'] = 'BORUSAN Yatırım ve Pazarlama A.Ş.'
+BRYAT['Stock Code'] = 'BRYAT'
+
+BRYAT['Close Today'] = BRYAT['Close'].iloc[-1]
+BRYAT.reset_index(inplace=True)
+BRYAT['Date'] = pd.to_datetime(BRYAT['Date']).dt.date
+BRYAT["previous_days_stock_price"] = BRYAT["Close"].shift(1)
+BRYAT['Oran'] = ((BRYAT['Close'] / BRYAT['previous_days_stock_price'])-1)
+
+#########################       BURSA Çimento Fabrikası A.Ş. (BUCIM.IS)       #########################
+
+stocksymbols = ['BUCIM.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+BUCIM=pd.DataFrame(data1)
+BUCIM = BUCIM[['Close']]
+
+BUCIM['Stock Name'] = 'BURSA Çimento Fabrikası A.Ş.'
+BUCIM['Stock Code'] = 'BUCIM'
+
+BUCIM['Close Today'] = BUCIM['Close'].iloc[-1]
+BUCIM.reset_index(inplace=True)
+BUCIM['Date'] = pd.to_datetime(BUCIM['Date']).dt.date
+BUCIM["previous_days_stock_price"] = BUCIM["Close"].shift(1)
+BUCIM['Oran'] = ((BUCIM['Close'] / BUCIM['previous_days_stock_price'])-1)
+
+#########################       CEMAS Dokuma Sanayi A.Ş. (CEMAS.IS)       #########################
+
+stocksymbols = ['CEMAS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+CEMAS=pd.DataFrame(data1)
+CEMAS = CEMAS[['Close']]
+
+CEMAS['Stock Name'] = 'CEMAS Dokuma Sanayi A.Ş.'
+CEMAS['Stock Code'] = 'CEMAS'
+
+CEMAS['Close Today'] = CEMAS['Close'].iloc[-1]
+CEMAS.reset_index(inplace=True)
+CEMAS['Date'] = pd.to_datetime(CEMAS['Date']).dt.date
+CEMAS["previous_days_stock_price"] = CEMAS["Close"].shift(1)
+CEMAS['Oran'] = ((CEMAS['Close'] / CEMAS['previous_days_stock_price'])-1)
+
+#########################       CEMTAS Çelik Makina Sanayi ve Ticaret A.Ş. (CEMTS.IS)       #########################
+
+stocksymbols = ['CEMTS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+CEMTS=pd.DataFrame(data1)
+CEMTS = CEMTS[['Close']]
+
+CEMTS['Stock Name'] = 'CEMTAS Çelik Makina Sanayi ve Ticaret A.Ş.'
+CEMTS['Stock Code'] = 'CEMTS'
+
+CEMTS['Close Today'] = CEMTS['Close'].iloc[-1]
+CEMTS.reset_index(inplace=True)
+CEMTS['Date'] = pd.to_datetime(CEMTS['Date']).dt.date
+CEMTS["previous_days_stock_price"] = CEMTS["Close"].shift(1)
+CEMTS['Oran'] = ((CEMTS['Close'] / CEMTS['previous_days_stock_price'])-1)
+
+#########################       CİMSA Çimento Sanayi ve Ticaret A.Ş. (CIMSA.IS)       #########################
+
+stocksymbols = ['CIMSA.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+CIMSA=pd.DataFrame(data1)
+CIMSA = CIMSA[['Close']]
+
+CIMSA['Stock Name'] = 'CİMSA Çimento Sanayi ve Ticaret A.Ş.'
+CIMSA['Stock Code'] = 'CIMSA'
+
+CIMSA['Close Today'] = CIMSA['Close'].iloc[-1]
+CIMSA.reset_index(inplace=True)
+CIMSA['Date'] = pd.to_datetime(CIMSA['Date']).dt.date
+CIMSA["previous_days_stock_price"] = CIMSA["Close"].shift(1)
+CIMSA['Oran'] = ((CIMSA['Close'] / CIMSA['previous_days_stock_price'])-1)
+
+#########################       COCO-COLA İçecek A.Ş. (CCOLA.IS)       #########################
+
+stocksymbols = ['CCOLA.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+CCOLA=pd.DataFrame(data1)
+CCOLA = CCOLA[['Close']]
+
+CCOLA['Stock Name'] = 'COCO-COLA İçecek A.Ş.'
+CCOLA['Stock Code'] = 'CCOLA'
+
+CCOLA['Close Today'] = CCOLA['Close'].iloc[-1]
+CCOLA.reset_index(inplace=True)
+CCOLA['Date'] = pd.to_datetime(CCOLA['Date']).dt.date
+CCOLA["previous_days_stock_price"] = CCOLA["Close"].shift(1)
+CCOLA['Oran'] = ((CCOLA['Close'] / CCOLA['previous_days_stock_price'])-1)
+
+#########################       DEVA Holding A.Ş. (DEVA.IS)       #########################
+
+stocksymbols = ['DEVA.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+DEVA=pd.DataFrame(data1)
+DEVA = DEVA[['Close']]
+
+DEVA['Stock Name'] = 'DEVA Holding A.Ş.'
+DEVA['Stock Code'] = 'DEVA'
+
+DEVA['Close Today'] = DEVA['Close'].iloc[-1]
+DEVA.reset_index(inplace=True)
+DEVA['Date'] = pd.to_datetime(DEVA['Date']).dt.date
+DEVA["previous_days_stock_price"] = DEVA["Close"].shift(1)
+DEVA['Oran'] = ((DEVA['Close'] / DEVA['previous_days_stock_price'])-1)
+
+#########################       DOĞAN Şirketler Grubu Holding A.Ş. (DOHOL.IS)       #########################
+
+stocksymbols = ['DOHOL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+DOHOL=pd.DataFrame(data1)
+DOHOL = DOHOL[['Close']]
+
+DOHOL['Stock Name'] = 'DOĞAN Şirketler Grubu Holding A.Ş.'
+DOHOL['Stock Code'] = 'DOHOL'
+
+DOHOL['Close Today'] = DOHOL['Close'].iloc[-1]
+DOHOL.reset_index(inplace=True)
+DOHOL['Date'] = pd.to_datetime(DOHOL['Date']).dt.date
+DOHOL["previous_days_stock_price"] = DOHOL["Close"].shift(1)
+DOHOL['Oran'] = ((DOHOL['Close'] / DOHOL['previous_days_stock_price'])-1)
+
+#########################       DOĞUŞ Otomotiv Servis ve Ticaret A.Ş. (DOAS.IS)       #########################
+
+stocksymbols = ['DOAS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+DOAS=pd.DataFrame(data1)
+DOAS = DOAS[['Close']]
+
+DOAS['Stock Name'] = 'DOĞUŞ Otomotiv Servis ve Ticaret A.Ş.'
+DOAS['Stock Code'] = 'DOAS'
+
+DOAS['Close Today'] = DOAS['Close'].iloc[-1]
+DOAS.reset_index(inplace=True)
+DOAS['Date'] = pd.to_datetime(DOAS['Date']).dt.date
+DOAS["previous_days_stock_price"] = DOAS["Close"].shift(1)
+DOAS['Oran'] = ((DOAS['Close'] / DOAS['previous_days_stock_price'])-1)
+
+#########################       EGE Endistüri ve Ticaret A.Ş. (EGEEN.IS)       #########################
+
+stocksymbols = ['EGEEN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+EGEEN=pd.DataFrame(data1)
+EGEEN = EGEEN[['Close']]
+
+EGEEN['Stock Name'] = 'EGE Endistüri ve Ticaret A.Ş.'
+EGEEN['Stock Code'] = 'EGEEN'
+
+EGEEN['Close Today'] = EGEEN['Close'].iloc[-1]
+EGEEN.reset_index(inplace=True)
+EGEEN['Date'] = pd.to_datetime(EGEEN['Date']).dt.date
+EGEEN["previous_days_stock_price"] = EGEEN["Close"].shift(1)
+EGEEN['Oran'] = ((EGEEN['Close'] / EGEEN['previous_days_stock_price'])-1)
+
+#########################       EIS ECZACIBAŞI İlaç Sinai ve Finansal Yatırımlar Sanayi ve Ticaret A.Ş. (ECILC.IS)       #########################
+
+stocksymbols = ['ECILC.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ECILC=pd.DataFrame(data1)
+ECILC = ECILC[['Close']]
+
+ECILC['Stock Name'] = 'EIS ECZACIBAŞI İlaç Sinai ve Finansal Yatırımlar Sanayi ve Ticaret A.Ş.'
+ECILC['Stock Code'] = 'ECILC'
+
+ECILC['Close Today'] = ECILC['Close'].iloc[-1]
+ECILC.reset_index(inplace=True)
+ECILC['Date'] = pd.to_datetime(ECILC['Date']).dt.date
+ECILC["previous_days_stock_price"] = ECILC["Close"].shift(1)
+ECILC['Oran'] = ((ECILC['Close'] / ECILC['previous_days_stock_price'])-1)
+
+#########################       EMLAK KONUT Gayrimenkul Yatırım Ortaklığı A.Ş. (EKGYO.IS)       #########################
+
+stocksymbols = ['EKGYO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+EKGYO=pd.DataFrame(data1)
+EKGYO = EKGYO[['Close']]
+
+EKGYO['Stock Name'] = 'EMLAK KONUT Gayrimenkul Yatırım Ortaklığı A.Ş.'
+EKGYO['Stock Code'] = 'EKGYO'
+
+EKGYO['Close Today'] = EKGYO['Close'].iloc[-1]
+EKGYO.reset_index(inplace=True)
+EKGYO['Date'] = pd.to_datetime(EKGYO['Date']).dt.date
+EKGYO["previous_days_stock_price"] = EKGYO["Close"].shift(1)
+EKGYO['Oran'] = ((EKGYO['Close'] / EKGYO['previous_days_stock_price'])-1)
+
+#########################       ENKA İnşaat ve Sanayi A.Ş. (ENKAI.IS)       #########################
+
+stocksymbols = ['ENKAI.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ENKAI=pd.DataFrame(data1)
+ENKAI = ENKAI[['Close']]
+
+ENKAI['Stock Name'] = 'ENKA İnşaat ve Sanayi A.Ş.'
+ENKAI['Stock Code'] = 'ENKAI'
+
+ENKAI['Close Today'] = ENKAI['Close'].iloc[-1]
+ENKAI.reset_index(inplace=True)
+ENKAI['Date'] = pd.to_datetime(ENKAI['Date']).dt.date
+ENKAI["previous_days_stock_price"] = ENKAI["Close"].shift(1)
+ENKAI['Oran'] = ((ENKAI['Close'] / ENKAI['previous_days_stock_price'])-1)
+
+#########################       ERBOSAN Erciyes Boru Sanayi ve Ticaret A.Ş. (ERBOS.IS)       #########################
+
+stocksymbols = ['ERBOS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ERBOS=pd.DataFrame(data1)
+ERBOS = ERBOS[['Close']]
+
+ERBOS['Stock Name'] = 'ERBOSAN Erciyes Boru Sanayi ve Ticaret A.Ş.'
+ERBOS['Stock Code'] = 'ERBOS'
+
+ERBOS['Close Today'] = ERBOS['Close'].iloc[-1]
+ERBOS.reset_index(inplace=True)
+ERBOS['Date'] = pd.to_datetime(ERBOS['Date']).dt.date
+ERBOS["previous_days_stock_price"] = ERBOS["Close"].shift(1)
+ERBOS['Oran'] = ((ERBOS['Close'] / ERBOS['previous_days_stock_price'])-1)
+
+#########################       EREĞLİ Demir ve Çelik Fabrikaları TAS (EREGL.IS)       #########################
+
+stocksymbols = ['EREGL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+EREGL=pd.DataFrame(data1)
+EREGL = EREGL[['Close']]
+
+EREGL['Stock Name'] = 'EREĞLİ Demir ve Çelik Fabrikaları TAS'
+EREGL['Stock Code'] = 'EREGL'
+
+EREGL['Close Today'] = EREGL['Close'].iloc[-1]
+EREGL.reset_index(inplace=True)
+EREGL['Date'] = pd.to_datetime(EREGL['Date']).dt.date
+EREGL["previous_days_stock_price"] = EREGL["Close"].shift(1)
+EREGL['Oran'] = ((EREGL['Close'] / EREGL['previous_days_stock_price'])-1)
+
+#########################       FORD Otomotiv Sanayi A.Ş. (FROTO.IS)       #########################
+
+stocksymbols = ['FROTO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+FROTO=pd.DataFrame(data1)
+FROTO = FROTO[['Close']]
+
+FROTO['Stock Name'] = 'FORD Otomotiv Sanayi A.Ş.'
+FROTO['Stock Code'] = 'FROTO'
+
+FROTO['Close Today'] = FROTO['Close'].iloc[-1]
+FROTO.reset_index(inplace=True)
+FROTO['Date'] = pd.to_datetime(FROTO['Date']).dt.date
+FROTO["previous_days_stock_price"] = FROTO["Close"].shift(1)
+FROTO['Oran'] = ((FROTO['Close'] / FROTO['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE Garanti Bankası (GARAN.IS)       #########################
+
+stocksymbols = ['GARAN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+GARAN=pd.DataFrame(data1)
+
+GARAN['Stock Name'] = 'TÜRKİYE Garanti Bankası'
+GARAN['Stock Code'] = 'GARAN'
+
+GARAN['Close Today'] = GARAN['Close'].iloc[-1]
+GARAN.reset_index(inplace=True)
+GARAN['Date'] = pd.to_datetime(GARAN['Date']).dt.date
+GARAN["previous_days_stock_price"] = GARAN["Close"].shift(1)
+GARAN['Oran'] = ((GARAN['Close'] / GARAN['previous_days_stock_price'])-1)
+
+#########################       GLOBAL Yatırım Holding A.Ş. (GLYHO.IS)       #########################
+
+stocksymbols = ['GLYHO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+GLYHO=pd.DataFrame(data1)
+GLYHO = GLYHO[['Close']]
+
+GLYHO['Stock Name'] = 'GLOBAL Yatırım Holding A.Ş.'
+GLYHO['Stock Code'] = 'GLYHO'
+
+GLYHO['Close Today'] = GLYHO['Close'].iloc[-1]
+GLYHO.reset_index(inplace=True)
+GLYHO['Date'] = pd.to_datetime(GLYHO['Date']).dt.date
+GLYHO["previous_days_stock_price"] = GLYHO["Close"].shift(1)
+GLYHO['Oran'] = ((GLYHO['Close'] / GLYHO['previous_days_stock_price'])-1)
+
+#########################       GOZDE Girişim Sermayesi Yatırım Ortaklığı A.Ş. (GOZDE.IS)       #########################
+
+stocksymbols = ['GOZDE.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+GOZDE=pd.DataFrame(data1)
+GOZDE = GOZDE[['Close']]
+
+GOZDE['Stock Name'] = 'GOZDE Girişim Sermayesi Yatırım Ortaklığı A.Ş.'
+GOZDE['Stock Code'] = 'GOZDE'
+
+GOZDE['Close Today'] = GOZDE['Close'].iloc[-1]
+GOZDE.reset_index(inplace=True)
+GOZDE['Date'] = pd.to_datetime(GOZDE['Date']).dt.date
+GOZDE["previous_days_stock_price"] = GOZDE["Close"].shift(1)
+GOZDE['Oran'] = ((GOZDE['Close'] / GOZDE['previous_days_stock_price'])-1)
+
+#########################       GÜBRE Fabrikaları TAS (GUBRF.IS)       #########################
+
+stocksymbols = ['GUBRF.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+GUBRF=pd.DataFrame(data1)
+GUBRF = GUBRF[['Close']]
+
+GUBRF['Stock Name'] = 'GÜBRE Fabrikaları TAS'
+GUBRF['Stock Code'] = 'GUBRF'
+
+GUBRF['Close Today'] = GUBRF['Close'].iloc[-1]
+GUBRF.reset_index(inplace=True)
+GUBRF['Date'] = pd.to_datetime(GUBRF['Date']).dt.date
+GUBRF["previous_days_stock_price"] = GUBRF["Close"].shift(1)
+GUBRF['Oran'] = ((GUBRF['Close'] / GUBRF['previous_days_stock_price'])-1)
+
+#########################       HEKTAS Ticaret TAS (HEKTS.IS)       #########################
+
+stocksymbols = ['HEKTS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+HEKTS=pd.DataFrame(data1)
+HEKTS = HEKTS[['Close']]
+
+HEKTS['Stock Name'] = 'HEKTAS Ticaret TAS'
+HEKTS['Stock Code'] = 'HEKTS'
+
+HEKTS['Close Today'] = HEKTS['Close'].iloc[-1]
+HEKTS.reset_index(inplace=True)
+HEKTS['Date'] = pd.to_datetime(HEKTS['Date']).dt.date
+HEKTS["previous_days_stock_price"] = HEKTS["Close"].shift(1)
+HEKTS['Oran'] = ((HEKTS['Close'] / HEKTS['previous_days_stock_price'])-1)
+
+#########################       İZMİR Demir Çelik Sanayi A.Ş. (IZMDC.IS)       #########################
+
+stocksymbols = ['IZMDC.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+IZMDC=pd.DataFrame(data1)
+IZMDC = IZMDC[['Close']]
+
+IZMDC['Stock Name'] = 'İZMİR Demir Çelik Sanayi A.Ş.'
+IZMDC['Stock Code'] = 'IZMDC'
+
+IZMDC['Close Today'] = IZMDC['Close'].iloc[-1]
+IZMDC.reset_index(inplace=True)
+IZMDC['Date'] = pd.to_datetime(IZMDC['Date']).dt.date
+IZMDC["previous_days_stock_price"] = IZMDC["Close"].shift(1)
+IZMDC['Oran'] = ((IZMDC['Close'] / IZMDC['previous_days_stock_price'])-1)
+
+#########################       İPEK Doğal Enerji Kaynakları Araştırma ve Üretim A.Ş. (IPEKE.IS)       #########################
+
+stocksymbols = ['IPEKE.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+IPEKE=pd.DataFrame(data1)
+IPEKE = IPEKE[['Close']]
+
+IPEKE['Stock Name'] = 'İPEK Doğal Enerji Kaynakları Araştırma ve Üretim A.Ş.'
+IPEKE['Stock Code'] = 'IPEKE'
+
+IPEKE['Close Today'] = IPEKE['Close'].iloc[-1]
+IPEKE.reset_index(inplace=True)
+IPEKE['Date'] = pd.to_datetime(IPEKE['Date']).dt.date
+IPEKE["previous_days_stock_price"] = IPEKE["Close"].shift(1)
+IPEKE['Oran'] = ((IPEKE['Close'] / IPEKE['previous_days_stock_price'])-1)
+
+#########################       İŞ Finansal Kiralama A.Ş. (ISFIN.IS)       #########################
+
+stocksymbols = ['ISFIN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ISFIN=pd.DataFrame(data1)
+ISFIN = ISFIN[['Close']]
+
+ISFIN['Stock Name'] = 'İŞ Finansal Kiralama A.Ş.'
+ISFIN['Stock Code'] = 'ISFIN'
+
+ISFIN['Close Today'] = ISFIN['Close'].iloc[-1]
+ISFIN.reset_index(inplace=True)
+ISFIN['Date'] = pd.to_datetime(ISFIN['Date']).dt.date
+ISFIN["previous_days_stock_price"] = ISFIN["Close"].shift(1)
+ISFIN['Oran'] = ((ISFIN['Close'] / ISFIN['previous_days_stock_price'])-1)
+
+#########################       İş Gayrimenkul Yatırım Ortaklığı (ISGYO.IS)       #########################
+
+stocksymbols = ['ISGYO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ISGYO=pd.DataFrame(data1)
+ISGYO = ISGYO[['Close']]
+
+ISGYO['Stock Name'] = 'İş Gayrimenkul Yatırım Ortaklığı'
+ISGYO['Stock Code'] = 'ISGYO'
+
+ISGYO['Close Today'] = ISGYO['Close'].iloc[-1]
+ISGYO.reset_index(inplace=True)
+ISGYO['Date'] = pd.to_datetime(ISGYO['Date']).dt.date
+ISGYO["previous_days_stock_price"] = ISGYO["Close"].shift(1)
+ISGYO['Oran'] = ((ISGYO['Close'] / ISGYO['previous_days_stock_price'])-1)
+
+#########################       İŞ Yatırım Menkul Değerler A.Ş. (ISMEN.IS)       #########################
+
+stocksymbols = ['ISMEN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ISMEN=pd.DataFrame(data1)
+ISMEN = ISMEN[['Close']]
+
+ISMEN['Stock Name'] = 'İŞ Yatırım Menkul Değerler A.Ş.'
+ISMEN['Stock Code'] = 'ISMEN'
+
+ISMEN['Close Today'] = ISMEN['Close'].iloc[-1]
+ISMEN.reset_index(inplace=True)
+ISMEN['Date'] = pd.to_datetime(ISMEN['Date']).dt.date
+ISMEN["previous_days_stock_price"] = ISMEN["Close"].shift(1)
+ISMEN['Oran'] = ((ISMEN['Close'] / ISMEN['previous_days_stock_price'])-1)
+
+#########################       İSKENDURUN Demir ve Çelik A.Ş. (ISDMR.IS)       #########################
+
+stocksymbols = ['ISDMR.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ISDMR=pd.DataFrame(data1)
+ISDMR = ISDMR[['Close']]
+
+ISDMR['Stock Name'] = 'İSKENDURUN Demir ve Çelik A.Ş.'
+ISDMR['Stock Code'] = 'ISDMR'
+
+ISDMR['Close Today'] = ISDMR['Close'].iloc[-1]
+ISDMR.reset_index(inplace=True)
+ISDMR['Date'] = pd.to_datetime(ISDMR['Date']).dt.date
+ISDMR["previous_days_stock_price"] = ISDMR["Close"].shift(1)
+ISDMR['Oran'] = ((ISDMR['Close'] / ISDMR['previous_days_stock_price'])-1)
+
+#########################       KARDEMİR Karabük Demir Çelik Sanayi ve Ticaret AS Class D (KRDMD.IS)       #########################
+
+stocksymbols = ['KRDMD.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KRDMD=pd.DataFrame(data1)
+KRDMD = KRDMD[['Close']]
+
+KRDMD['Stock Name'] = 'KARDEMİR Karabük Demir Çelik Sanayi ve Ticaret AS Class D'
+KRDMD['Stock Code'] = 'KRDMD'
+
+KRDMD['Close Today'] = KRDMD['Close'].iloc[-1]
+KRDMD.reset_index(inplace=True)
+KRDMD['Date'] = pd.to_datetime(KRDMD['Date']).dt.date
+KRDMD["previous_days_stock_price"] = KRDMD["Close"].shift(1)
+KRDMD['Oran'] = ((KRDMD['Close'] / KRDMD['previous_days_stock_price'])-1)
+
+#########################       KARSAN Otomotive Sanayi ve Ticaret A.Ş. (KARSN.IS)       #########################
+
+stocksymbols = ['KARSN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KARSN=pd.DataFrame(data1)
+KARSN = KARSN[['Close']]
+
+KARSN['Stock Name'] = 'KARSAN Otomotive Sanayi ve Ticaret A.Ş.'
+KARSN['Stock Code'] = 'KARSN'
+
+KARSN['Close Today'] = KARSN['Close'].iloc[-1]
+KARSN.reset_index(inplace=True)
+KARSN['Date'] = pd.to_datetime(KARSN['Date']).dt.date
+KARSN["previous_days_stock_price"] = KARSN["Close"].shift(1)
+KARSN['Oran'] = ((KARSN['Close'] / KARSN['previous_days_stock_price'])-1)
+
+#########################       KARTONSAN Karton Sanayi ve Ticaret A.Ş. (KARTN.IS)       #########################
+
+stocksymbols = ['KARTN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KARTN=pd.DataFrame(data1)
+KARTN = KARTN[['Close']]
+
+KARTN['Stock Name'] = 'KARTONSAN Karton Sanayi ve Ticaret A.Ş.'
+KARTN['Stock Code'] = 'KARTN'
+
+KARTN['Close Today'] = KARTN['Close'].iloc[-1]
+KARTN.reset_index(inplace=True)
+KARTN['Date'] = pd.to_datetime(KARTN['Date']).dt.date
+KARTN["previous_days_stock_price"] = KARTN["Close"].shift(1)
+KARTN['Oran'] = ((KARTN['Close'] / KARTN['previous_days_stock_price'])-1)
+
+#########################       KEREVİTAŞ Gıda Sanayi ve Ticaret A.Ş. (KERVT.IS)       #########################
+
+stocksymbols = ['KERVT.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KERVT=pd.DataFrame(data1)
+KERVT = KERVT[['Close']]
+
+KERVT['Stock Name'] = 'KEREVİTAŞ Gıda Sanayi ve Ticaret A.Ş.'
+KERVT['Stock Code'] = 'KERVT'
+
+KERVT['Close Today'] = KERVT['Close'].iloc[-1]
+KERVT.reset_index(inplace=True)
+KERVT['Date'] = pd.to_datetime(KERVT['Date']).dt.date
+KERVT["previous_days_stock_price"] = KERVT["Close"].shift(1)
+KERVT['Oran'] = ((KERVT['Close'] / KERVT['previous_days_stock_price'])-1)
+
+#########################       KOÇ Holding A.Ş. (KCHOL.IS)       #########################
+
+stocksymbols = ['KCHOL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KCHOL=pd.DataFrame(data1)
+KCHOL = KCHOL[['Close']]
+
+KCHOL['Stock Name'] = 'KOÇ Holding A.Ş.'
+KCHOL['Stock Code'] = 'KCHOL'
+
+KCHOL['Close Today'] = KCHOL['Close'].iloc[-1]
+KCHOL.reset_index(inplace=True)
+KCHOL['Date'] = pd.to_datetime(KCHOL['Date']).dt.date
+KCHOL["previous_days_stock_price"] = KCHOL["Close"].shift(1)
+KCHOL['Oran'] = ((KCHOL['Close'] / KCHOL['previous_days_stock_price'])-1)
+
+#########################       KORDSA Global Endüstriyel İplik ve Kord Bezi Sanayi ve Ticaret A.Ş. (KORDS.IS)       #########################
+
+stocksymbols = ['KORDS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KORDS=pd.DataFrame(data1)
+KORDS = KORDS[['Close']]
+
+KORDS['Stock Name'] = 'KORDSA Global Endüstriyel İplik ve Kord Bezi Sanayi ve Ticaret A.Ş.'
+KORDS['Stock Code'] = 'KORDS'
+
+KORDS['Close Today'] = KORDS['Close'].iloc[-1]
+KORDS.reset_index(inplace=True)
+KORDS['Date'] = pd.to_datetime(KORDS['Date']).dt.date
+KORDS["previous_days_stock_price"] = KORDS["Close"].shift(1)
+KORDS['Oran'] = ((KORDS['Close'] / KORDS['previous_days_stock_price'])-1)
+
+#########################       KOZA Altın İşletmeleri A.Ş. (KOZAL.IS)       #########################
+
+stocksymbols = ['KOZAL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KOZAL=pd.DataFrame(data1)
+KOZAL = KOZAL[['Close']]
+
+KOZAL['Stock Name'] = 'KOZA Altın İşletmeleri A.Ş.'
+KOZAL['Stock Code'] = 'KOZAL'
+
+KOZAL['Close Today'] = KOZAL['Close'].iloc[-1]
+KOZAL.reset_index(inplace=True)
+KOZAL['Date'] = pd.to_datetime(KOZAL['Date']).dt.date
+KOZAL["previous_days_stock_price"] = KOZAL["Close"].shift(1)
+KOZAL['Oran'] = ((KOZAL['Close'] / KOZAL['previous_days_stock_price'])-1)
+
+#########################       KOZA Anadolu Metal Madencilik İşletmeleri A.Ş. (KOZAA.IS)       #########################
+
+stocksymbols = ['KOZAA.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+KOZAA=pd.DataFrame(data1)
+KOZAA = KOZAA[['Close']]
+
+KOZAA['Stock Name'] = 'KOZA Anadolu Metal Madencilik İşletmeleri A.Ş.'
+KOZAA['Stock Code'] = 'KOZAA'
+
+KOZAA['Close Today'] = KOZAA['Close'].iloc[-1]
+KOZAA.reset_index(inplace=True)
+KOZAA['Date'] = pd.to_datetime(KOZAA['Date']).dt.date
+KOZAA["previous_days_stock_price"] = KOZAA["Close"].shift(1)
+KOZAA['Oran'] = ((KOZAA['Close'] / KOZAA['previous_days_stock_price'])-1)
+
+#########################       LOGO Yazılım Sanayi ve Ticaret A.Ş. (LOGO.IS)       #########################
+
+stocksymbols = ['LOGO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+LOGO=pd.DataFrame(data1)
+LOGO = LOGO[['Close']]
+
+LOGO['Stock Name'] = 'LOGO Yazılım Sanayi ve Ticaret A.Ş.'
+LOGO['Stock Code'] = 'LOGO'
+
+LOGO['Close Today'] = LOGO['Close'].iloc[-1]
+LOGO.reset_index(inplace=True)
+LOGO['Date'] = pd.to_datetime(LOGO['Date']).dt.date
+LOGO["previous_days_stock_price"] = LOGO["Close"].shift(1)
+LOGO['Oran'] = ((LOGO['Close'] / LOGO['previous_days_stock_price'])-1)
+
+#########################       MAVİ Giyim Sanayi ve Ticaret A.Ş. (MAVI.IS)       #########################
+
+stocksymbols = ['MAVI.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+MAVI=pd.DataFrame(data1)
+MAVI = MAVI[['Close']]
+
+MAVI['Stock Name'] = 'MAVİ Giyim Sanayi ve Ticaret A.Ş.'
+MAVI['Stock Code'] = 'MAVI'
+
+MAVI['Close Today'] = MAVI['Close'].iloc[-1]
+MAVI.reset_index(inplace=True)
+MAVI['Date'] = pd.to_datetime(MAVI['Date']).dt.date
+MAVI["previous_days_stock_price"] = MAVI["Close"].shift(1)
+MAVI['Oran'] = ((MAVI['Close'] / MAVI['previous_days_stock_price'])-1)
+
+#########################       MİGROS Ticaret A.Ş. (MGROS.IS)       #########################
+
+stocksymbols = ['MGROS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+MGROS=pd.DataFrame(data1)
+MGROS = MGROS[['Close']]
+
+MGROS['Stock Name'] = 'MİGROS Ticaret A.Ş.'
+MGROS['Stock Code'] = 'MGROS'
+
+MGROS['Close Today'] = MGROS['Close'].iloc[-1]
+MGROS.reset_index(inplace=True)
+MGROS['Date'] = pd.to_datetime(MGROS['Date']).dt.date
+MGROS["previous_days_stock_price"] = MGROS["Close"].shift(1)
+MGROS['Oran'] = ((MGROS['Close'] / MGROS['previous_days_stock_price'])-1)
+
+#########################       NET Holding A.Ş. (NTHOL.IS)       #########################
+
+stocksymbols = ['NTHOL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+NTHOL=pd.DataFrame(data1)
+NTHOL = NTHOL[['Close']]
+
+NTHOL['Stock Name'] = 'NET Holding A.Ş.'
+NTHOL['Stock Code'] = 'NTHOL'
+
+NTHOL['Close Today'] = NTHOL['Close'].iloc[-1]
+NTHOL.reset_index(inplace=True)
+NTHOL['Date'] = pd.to_datetime(NTHOL['Date']).dt.date
+NTHOL["previous_days_stock_price"] = NTHOL["Close"].shift(1)
+NTHOL['Oran'] = ((NTHOL['Close'] / NTHOL['previous_days_stock_price'])-1)
+
+#########################       ODAS Elektrik Üretim Sanayi Ticaret A.Ş. (ODAS.IS)       #########################
+
+stocksymbols = ['ODAS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ODAS=pd.DataFrame(data1)
+ODAS = ODAS[['Close']]
+
+ODAS['Stock Name'] = 'ODAS Elektrik Üretim Sanayi Ticaret A.Ş.'
+ODAS['Stock Code'] = 'ODAS'
+
+ODAS['Close Today'] = ODAS['Close'].iloc[-1]
+ODAS.reset_index(inplace=True)
+ODAS['Date'] = pd.to_datetime(ODAS['Date']).dt.date
+ODAS["previous_days_stock_price"] = ODAS["Close"].shift(1)
+ODAS['Oran'] = ((ODAS['Close'] / ODAS['previous_days_stock_price'])-1)
+
+#########################       OTOKAR Otomotiv ve Savunma Sanayi A.Ş. (OTKAR.IS)       #########################
+
+stocksymbols = ['OTKAR.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+OTKAR=pd.DataFrame(data1)
+OTKAR = OTKAR[['Close']]
+
+OTKAR['Stock Name'] = 'OTOKAR Otomotiv ve Savunma Sanayi A.Ş.'
+OTKAR['Stock Code'] = 'OTKAR'
+
+OTKAR['Close Today'] = OTKAR['Close'].iloc[-1]
+OTKAR.reset_index(inplace=True)
+OTKAR['Date'] = pd.to_datetime(OTKAR['Date']).dt.date
+OTKAR["previous_days_stock_price"] = OTKAR["Close"].shift(1)
+OTKAR['Oran'] = ((OTKAR['Close'] / OTKAR['previous_days_stock_price'])-1)
+
+#########################       OYAK Çimento Fabrikaları A.Ş. (OYAKC.IS)       #########################
+
+stocksymbols = ['OYAKC.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+OYAKC=pd.DataFrame(data1)
+OYAKC = OYAKC[['Close']]
+
+OYAKC['Stock Name'] = 'OYAK Çimento Fabrikaları A.Ş.'
+OYAKC['Stock Code'] = 'OYAKC'
+
+OYAKC['Close Today'] = OYAKC['Close'].iloc[-1]
+OYAKC.reset_index(inplace=True)
+OYAKC['Date'] = pd.to_datetime(OYAKC['Date']).dt.date
+OYAKC["previous_days_stock_price"] = OYAKC["Close"].shift(1)
+OYAKC['Oran'] = ((OYAKC['Close'] / OYAKC['previous_days_stock_price'])-1)
+
+#########################       PEGASUS Hava Taşımacılığı A.Ş. (PGSUS.IS)       #########################
+
+stocksymbols = ['PGSUS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+PGSUS=pd.DataFrame(data1)
+PGSUS = PGSUS[['Close']]
+
+PGSUS['Stock Name'] = 'PEGASUS Hava Taşımacılığı A.Ş.'
+PGSUS['Stock Code'] = 'PGSUS'
+
+PGSUS['Close Today'] = PGSUS['Close'].iloc[-1]
+PGSUS.reset_index(inplace=True)
+PGSUS['Date'] = pd.to_datetime(PGSUS['Date']).dt.date
+PGSUS["previous_days_stock_price"] = PGSUS["Close"].shift(1)
+PGSUS['Oran'] = ((PGSUS['Close'] / PGSUS['previous_days_stock_price'])-1)
+
+#########################       PETKİM Petrokimya Holding A.Ş. (PETKM.IS)       #########################
+
+stocksymbols = ['PETKM.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+PETKM=pd.DataFrame(data1)
+PETKM = PETKM[['Close']]
+
+PETKM['Stock Name'] = 'PETKİM Petrokimya Holding A.Ş.'
+PETKM['Stock Code'] = 'PETKM'
+
+PETKM['Close Today'] = PETKM['Close'].iloc[-1]
+PETKM.reset_index(inplace=True)
+PETKM['Date'] = pd.to_datetime(PETKM['Date']).dt.date
+PETKM["previous_days_stock_price"] = PETKM["Close"].shift(1)
+PETKM['Oran'] = ((PETKM['Close'] / PETKM['previous_days_stock_price'])-1)
+
+#########################       QUA Granite Hayal Yapi ve Ürünleri Sanayi Ticaret A.Ş. (QUAGR.IS)       #########################
+
+stocksymbols = ['QUAGR.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+QUAGR=pd.DataFrame(data1)
+QUAGR = QUAGR[['Close']]
+
+QUAGR['Stock Name'] = 'QUA Granite Hayal Yapi ve Ürünleri Sanayi Ticaret A.Ş.'
+QUAGR['Stock Code'] = 'QUAGR'
+
+QUAGR['Close Today'] = QUAGR['Close'].iloc[-1]
+QUAGR.reset_index(inplace=True)
+QUAGR['Date'] = pd.to_datetime(QUAGR['Date']).dt.date
+QUAGR["previous_days_stock_price"] = QUAGR["Close"].shift(1)
+QUAGR['Oran'] = ((QUAGR['Close'] / QUAGR['previous_days_stock_price'])-1)
+
+#########################       RTA Labaratuvarları Biyolojik Ürünler İlaç ve Makine Sanayi Ticaret A.Ş. (RTALB.IS)       #########################
+
+stocksymbols = ['RTALB.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+RTALB=pd.DataFrame(data1)
+RTALB = RTALB[['Close']]
+
+RTALB['Stock Name'] = 'RTA Labaratuvarları Biyolojik Ürünler İlaç ve Makine Sanayi Ticaret A.Ş.'
+RTALB['Stock Code'] = 'RTALB'
+
+RTALB['Close Today'] = RTALB['Close'].iloc[-1]
+RTALB.reset_index(inplace=True)
+RTALB['Date'] = pd.to_datetime(RTALB['Date']).dt.date
+RTALB["previous_days_stock_price"] = RTALB["Close"].shift(1)
+RTALB['Oran'] = ((RTALB['Close'] / RTALB['previous_days_stock_price'])-1)
+
+#########################       HACI Ömer Sabancı Holding A.Ş. (SAHOL.IS)       #########################
+
+stocksymbols = ['SAHOL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+SAHOL=pd.DataFrame(data1)
+SAHOL = SAHOL[['Close']]
+
+SAHOL['Stock Name'] = 'HACI Ömer Sabancı Holding A.Ş.'
+SAHOL['Stock Code'] = 'SAHOL'
+
+SAHOL['Close Today'] = SAHOL['Close'].iloc[-1]
+SAHOL.reset_index(inplace=True)
+SAHOL['Date'] = pd.to_datetime(SAHOL['Date']).dt.date
+SAHOL["previous_days_stock_price"] = SAHOL["Close"].shift(1)
+SAHOL['Oran'] = ((SAHOL['Close'] / SAHOL['previous_days_stock_price'])-1)
+
+#########################       SARKUYSAN Elektrolitik Bakır Sanayi ve Ticaret A.Ş. (SARKY.IS)       #########################
+
+stocksymbols = ['SARKY.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+SARKY=pd.DataFrame(data1)
+SARKY = SARKY[['Close']]
+
+SARKY['Stock Name'] = 'SARKUYSAN Elektrolitik Bakır Sanayi ve Ticaret A.Ş.'
+SARKY['Stock Code'] = 'SARKY'
+
+SARKY['Close Today'] = SARKY['Close'].iloc[-1]
+SARKY.reset_index(inplace=True)
+SARKY['Date'] = pd.to_datetime(SARKY['Date']).dt.date
+SARKY["previous_days_stock_price"] = SARKY["Close"].shift(1)
+SARKY['Oran'] = ((SARKY['Close'] / SARKY['previous_days_stock_price'])-1)
+
+#########################       SASA Polyester Sanayi A.Ş. (SASA.IS)       #########################
+
+stocksymbols = ['SASA.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+SASA=pd.DataFrame(data1)
+SASA = SASA[['Close']]
+
+SASA['Stock Name'] = 'SASA Polyester Sanayi A.Ş.'
+SASA['Stock Code'] = 'SASA'
+
+SASA['Close Today'] = SASA['Close'].iloc[-1]
+SASA.reset_index(inplace=True)
+SASA['Date'] = pd.to_datetime(SASA['Date']).dt.date
+SASA["previous_days_stock_price"] = SASA["Close"].shift(1)
+SASA['Oran'] = ((SASA['Close'] / SASA['previous_days_stock_price'])-1)
+
+#########################       ŞEKERBANK TAS (SKBNK.IS)       #########################
+
+stocksymbols = ['SKBNK.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+SKBNK=pd.DataFrame(data1)
+SKBNK = SKBNK[['Close']]
+
+SKBNK['Stock Name'] = 'ŞEKERBANK TAS'
+SKBNK['Stock Code'] = 'SKBNK'
+
+SKBNK['Close Today'] = SKBNK['Close'].iloc[-1]
+SKBNK.reset_index(inplace=True)
+SKBNK['Date'] = pd.to_datetime(SKBNK['Date']).dt.date
+SKBNK["previous_days_stock_price"] = SKBNK["Close"].shift(1)
+SKBNK['Oran'] = ((SKBNK['Close'] / SKBNK['previous_days_stock_price'])-1)
+
+#########################       SELÇUK Ecza Deposu Sanayi ve Ticaret A.Ş. (SELEC.IS)       #########################
+
+stocksymbols = ['SELEC.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+SELEC=pd.DataFrame(data1)
+SELEC = SELEC[['Close']]
+
+SELEC['Stock Name'] = 'SELÇUK Ecza Deposu Sanayi ve Ticaret A.Ş.'
+SELEC['Stock Code'] = 'SELEC'
+
+SELEC['Close Today'] = SELEC['Close'].iloc[-1]
+SELEC.reset_index(inplace=True)
+SELEC['Date'] = pd.to_datetime(SELEC['Date']).dt.date
+SELEC["previous_days_stock_price"] = SELEC["Close"].shift(1)
+SELEC['Oran'] = ((SELEC['Close'] / SELEC['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE Şişe ve Cam Fabrikaları A.Ş. (SISE.IS)       #########################
+
+stocksymbols = ['SISE.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+SISE=pd.DataFrame(data1)
+SISE = SISE[['Close']]
+
+SISE['Stock Name'] = 'TÜRKİYE Şişe ve Cam Fabrikaları A.Ş.'
+SISE['Stock Code'] = 'SISE'
+
+SISE['Close Today'] = SISE['Close'].iloc[-1]
+SISE.reset_index(inplace=True)
+SISE['Date'] = pd.to_datetime(SISE['Date']).dt.date
+SISE["previous_days_stock_price"] = SISE["Close"].shift(1)
+SISE['Oran'] = ((SISE['Close'] / SISE['previous_days_stock_price'])-1)
+
+#########################       ŞOK Marketler (SOKM.IS)       #########################
+
+stocksymbols = ['SOKM.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+SOKM=pd.DataFrame(data1)
+SOKM = SOKM[['Close']]
+
+SOKM['Stock Name'] = 'ŞOK Marketler'
+SOKM['Stock Code'] = 'SOKM'
+
+SOKM['Close Today'] = SOKM['Close'].iloc[-1]
+SOKM.reset_index(inplace=True)
+SOKM['Date'] = pd.to_datetime(SOKM['Date']).dt.date
+SOKM["previous_days_stock_price"] = SOKM["Close"].shift(1)
+SOKM['Oran'] = ((SOKM['Close'] / SOKM['previous_days_stock_price'])-1)
+
+#########################       TAV Havalimanları Holding (TAVHL.IS)       #########################
+
+stocksymbols = ['TAVHL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TAVHL=pd.DataFrame(data1)
+TAVHL = TAVHL[['Close']]
+
+TAVHL['Stock Name'] = 'TAV Havalimanları Holding'
+TAVHL['Stock Code'] = 'TAVHL'
+
+TAVHL['Close Today'] = TAVHL['Close'].iloc[-1]
+TAVHL.reset_index(inplace=True)
+TAVHL['Date'] = pd.to_datetime(TAVHL['Date']).dt.date
+TAVHL["previous_days_stock_price"] = TAVHL["Close"].shift(1)
+TAVHL['Oran'] = ((TAVHL['Close'] / TAVHL['previous_days_stock_price'])-1)
+
+#########################       TEKFEN Holding A.Ş. (TKFEN.IS)       #########################
+
+stocksymbols = ['TKFEN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TKFEN=pd.DataFrame(data1)
+TKFEN = TKFEN[['Close']]
+
+TKFEN['Stock Name'] = 'İş Gayrimenkul Yatırım Ortaklığı'
+TKFEN['Stock Code'] = 'TKFEN'
+
+TKFEN['Close Today'] = TKFEN['Close'].iloc[-1]
+TKFEN.reset_index(inplace=True)
+TKFEN['Date'] = pd.to_datetime(TKFEN['Date']).dt.date
+TKFEN["previous_days_stock_price"] = TKFEN["Close"].shift(1)
+TKFEN['Oran'] = ((TKFEN['Close'] / TKFEN['previous_days_stock_price'])-1)
+
+#########################       TURKISH Airlines (THYAO.IS)       #########################
+
+stocksymbols = ['THYAO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+THYAO=pd.DataFrame(data1)
+THYAO = THYAO[['Close']]
+
+THYAO['Stock Name'] = 'TURKISH Airlines'
+THYAO['Stock Code'] = 'THYAO'
+
+THYAO['Close Today'] = THYAO['Close'].iloc[-1]
+THYAO.reset_index(inplace=True)
+THYAO['Date'] = pd.to_datetime(THYAO['Date']).dt.date
+THYAO["previous_days_stock_price"] = THYAO["Close"].shift(1)
+THYAO['Oran'] = ((THYAO['Close'] / THYAO['previous_days_stock_price'])-1)
+
+#########################       TOFAŞ Türk Otomobil Fabrikası A.Ş. (TOASO.IS)       #########################
+
+stocksymbols = ['TOASO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TOASO=pd.DataFrame(data1)
+TOASO = TOASO[['Close']]
+
+TOASO['Stock Name'] = 'İş Gayrimenkul Yatırım Ortaklığı'
+TOASO['Stock Code'] = 'TOASO'
+
+TOASO['Close Today'] = TOASO['Close'].iloc[-1]
+TOASO.reset_index(inplace=True)
+TOASO['Date'] = pd.to_datetime(TOASO['Date']).dt.date
+TOASO["previous_days_stock_price"] = TOASO["Close"].shift(1)
+TOASO['Oran'] = ((TOASO['Close'] / TOASO['previous_days_stock_price'])-1)
+
+#########################       TORUNLAR Gayrimenkul Yatırım Ortaklığı A.Ş. (TRGYO.IS)       #########################
+
+stocksymbols = ['TRGYO.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TRGYO=pd.DataFrame(data1)
+TRGYO = TRGYO[['Close']]
+
+TRGYO['Stock Name'] = 'TORUNLAR Gayrimenkul Yatırım Ortaklığı A.Ş.'
+TRGYO['Stock Code'] = 'TRGYO'
+
+TRGYO['Close Today'] = TRGYO['Close'].iloc[-1]
+TRGYO.reset_index(inplace=True)
+TRGYO['Date'] = pd.to_datetime(TRGYO['Date']).dt.date
+TRGYO["previous_days_stock_price"] = TRGYO["Close"].shift(1)
+TRGYO['Oran'] = ((TRGYO['Close'] / TRGYO['previous_days_stock_price'])-1)
+
+#########################       TRABZONSPOR Sportif Yatırım ve Futbol İşletmeciliği Ticaret A.Ş. (TSPOR.IS)       #########################
+
+stocksymbols = ['TSPOR.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TSPOR=pd.DataFrame(data1)
+TSPOR = TSPOR[['Close']]
+
+TSPOR['Stock Name'] = 'TRABZONSPOR Sportif Yatırım ve Futbol İşletmeciliği Ticaret A.Ş.'
+TSPOR['Stock Code'] = 'TSPOR'
+
+TSPOR['Close Today'] = TSPOR['Close'].iloc[-1]
+TSPOR.reset_index(inplace=True)
+TSPOR['Date'] = pd.to_datetime(TSPOR['Date']).dt.date
+TSPOR["previous_days_stock_price"] = TSPOR["Close"].shift(1)
+TSPOR['Oran'] = ((TSPOR['Close'] / TSPOR['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE Sinai Kalkınma Bankası A.Ş. (TSKB.IS)       #########################
+
+stocksymbols = ['TSKB.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TSKB=pd.DataFrame(data1)
+TSKB = TSKB[['Close']]
+
+TSKB['Stock Name'] = 'TÜRKİYE Sinai Kalkınma Bankası A.Ş.'
+TSKB['Stock Code'] = 'TSKB'
+
+TSKB['Close Today'] = TSKB['Close'].iloc[-1]
+TSKB.reset_index(inplace=True)
+TSKB['Date'] = pd.to_datetime(TSKB['Date']).dt.date
+TSKB["previous_days_stock_price"] = TSKB["Close"].shift(1)
+TSKB['Oran'] = ((TSKB['Close'] / TSKB['previous_days_stock_price'])-1)
+
+#########################       TUKAŞ Gıda Sanayi ve Ticaret A.Ş. (TUKAS.IS)       #########################
+
+stocksymbols = ['TUKAS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TUKAS=pd.DataFrame(data1)
+TUKAS = TUKAS[['Close']]
+
+TUKAS['Stock Name'] = 'TUKAŞ Gıda Sanayi ve Ticaret A.Ş.'
+TUKAS['Stock Code'] = 'TUKAS'
+
+TUKAS['Close Today'] = TUKAS['Close'].iloc[-1]
+TUKAS.reset_index(inplace=True)
+TUKAS['Date'] = pd.to_datetime(TUKAS['Date']).dt.date
+TUKAS["previous_days_stock_price"] = TUKAS["Close"].shift(1)
+TUKAS['Oran'] = ((TUKAS['Close'] / TUKAS['previous_days_stock_price'])-1)
+
+#########################       TÜMOSAN Motor ve Traktör Sanayi A.Ş. (TMSN.IS)       #########################
+
+stocksymbols = ['TMSN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TMSN=pd.DataFrame(data1)
+TMSN = TMSN[['Close']]
+
+TMSN['Stock Name'] = 'TÜMOSAN Motor ve Traktör Sanayi A.Ş.'
+TMSN['Stock Code'] = 'TMSN'
+
+TMSN['Close Today'] = TMSN['Close'].iloc[-1]
+TMSN.reset_index(inplace=True)
+TMSN['Date'] = pd.to_datetime(TMSN['Date']).dt.date
+TMSN["previous_days_stock_price"] = TMSN["Close"].shift(1)
+TMSN['Oran'] = ((TMSN['Close'] / TMSN['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE Petrol Rafinerileri A.Ş. (TUPRS.IS)       #########################
+
+stocksymbols = ['TUPRS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TUPRS=pd.DataFrame(data1)
+TUPRS = TUPRS[['Close']]
+
+TUPRS['Stock Name'] = 'TÜRKİYE Petrol Rafinerileri A.Ş.'
+TUPRS['Stock Code'] = 'TUPRS'
+
+TUPRS['Close Today'] = TUPRS['Close'].iloc[-1]
+TUPRS.reset_index(inplace=True)
+TUPRS['Date'] = pd.to_datetime(TUPRS['Date']).dt.date
+TUPRS["previous_days_stock_price"] = TUPRS["Close"].shift(1)
+TUPRS['Oran'] = ((TUPRS['Close'] / TUPRS['previous_days_stock_price'])-1)
+
+#########################       TÜRK Prysmian Kablo ve Sistemleri A.Ş. (PRKAB.IS)       #########################
+
+stocksymbols = ['PRKAB.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+PRKAB=pd.DataFrame(data1)
+PRKAB = PRKAB[['Close']]
+
+PRKAB['Stock Name'] = 'TÜRK Prysmian Kablo ve Sistemleri A.Ş.'
+PRKAB['Stock Code'] = 'PRKAB'
+
+PRKAB['Close Today'] = PRKAB['Close'].iloc[-1]
+PRKAB.reset_index(inplace=True)
+PRKAB['Date'] = pd.to_datetime(PRKAB['Date']).dt.date
+PRKAB["previous_days_stock_price"] = PRKAB["Close"].shift(1)
+PRKAB['Oran'] = ((PRKAB['Close'] / PRKAB['previous_days_stock_price'])-1)
+
+#########################       TÜRK Telekomünikasyon A.Ş. (TTKOM.IS)       #########################
+
+stocksymbols = ['TTKOM.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TTKOM=pd.DataFrame(data1)
+TTKOM = TTKOM[['Close']]
+
+TTKOM['Stock Name'] = 'TÜRK Telekomünikasyon A.Ş.'
+TTKOM['Stock Code'] = 'TTKOM'
+
+TTKOM['Close Today'] = TTKOM['Close'].iloc[-1]
+TTKOM.reset_index(inplace=True)
+TTKOM['Date'] = pd.to_datetime(TTKOM['Date']).dt.date
+TTKOM["previous_days_stock_price"] = TTKOM["Close"].shift(1)
+TTKOM['Oran'] = ((TTKOM['Close'] / TTKOM['previous_days_stock_price'])-1)
+
+#########################       TÜRK Traktör ve Ziraat Makineleri A.Ş. (TTRAK.IS)       #########################
+
+stocksymbols = ['TTRAK.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TTRAK=pd.DataFrame(data1)
+TTRAK = TTRAK[['Close']]
+
+TTRAK['Stock Name'] = 'TÜRK Traktör ve Ziraat Makineleri A.Ş.'
+TTRAK['Stock Code'] = 'TTRAK'
+
+TTRAK['Close Today'] = TTRAK['Close'].iloc[-1]
+TTRAK.reset_index(inplace=True)
+TTRAK['Date'] = pd.to_datetime(TTRAK['Date']).dt.date
+TTRAK["previous_days_stock_price"] = TTRAK["Close"].shift(1)
+TTRAK['Oran'] = ((TTRAK['Close'] / TTRAK['previous_days_stock_price'])-1)
+
+#########################       TURKCELL İletişim Hizmetleri A.Ş. ORD (TCELL.IS)       #########################
+
+stocksymbols = ['TCELL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TCELL=pd.DataFrame(data1)
+TCELL = TCELL[['Close']]
+
+TCELL['Stock Name'] = 'TURKCELL İletişim Hizmetleri A.Ş. ORD'
+TCELL['Stock Code'] = 'TCELL'
+
+TCELL['Close Today'] = TCELL['Close'].iloc[-1]
+TCELL.reset_index(inplace=True)
+TCELL['Date'] = pd.to_datetime(TCELL['Date']).dt.date
+TCELL["previous_days_stock_price"] = TCELL["Close"].shift(1)
+TCELL['Oran'] = ((TCELL['Close'] / TCELL['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE Halk Bankası (HALKB.IS)       #########################
+
+stocksymbols = ['HALKB.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+HALKB=pd.DataFrame(data1)
+HALKB = HALKB[['Close']]
+
+HALKB['Stock Name'] = 'TÜRKİYE Halk Bankası'
+HALKB['Stock Code'] = 'HALKB'
+
+HALKB['Close Today'] = HALKB['Close'].iloc[-1]
+HALKB.reset_index(inplace=True)
+HALKB['Date'] = pd.to_datetime(HALKB['Date']).dt.date
+HALKB["previous_days_stock_price"] = HALKB["Close"].shift(1)
+HALKB['Oran'] = ((HALKB['Close'] / HALKB['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE İş Bankası A.Ş. Class C (ISCTR.IS)       #########################
+
+stocksymbols = ['ISCTR.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ISCTR=pd.DataFrame(data1)
+ISCTR = ISCTR[['Close']]
+
+ISCTR['Stock Name'] = 'TÜRKİYE İş Bankası A.Ş. Class C'
+ISCTR['Stock Code'] = 'ISCTR'
+
+ISCTR['Close Today'] = ISCTR['Close'].iloc[-1]
+ISCTR.reset_index(inplace=True)
+ISCTR['Date'] = pd.to_datetime(ISCTR['Date']).dt.date
+ISCTR["previous_days_stock_price"] = ISCTR["Close"].shift(1)
+ISCTR['Oran'] = ((ISCTR['Close'] / ISCTR['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE Sigorta A.Ş. (TURSG.IS)       #########################
+
+stocksymbols = ['TURSG.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+TURSG=pd.DataFrame(data1)
+TURSG = TURSG[['Close']]
+
+TURSG['Stock Name'] = 'TÜRKİYE Sigorta A.Ş.'
+TURSG['Stock Code'] = 'TURSG'
+
+TURSG['Close Today'] = TURSG['Close'].iloc[-1]
+TURSG.reset_index(inplace=True)
+TURSG['Date'] = pd.to_datetime(TURSG['Date']).dt.date
+TURSG["previous_days_stock_price"] = TURSG["Close"].shift(1)
+TURSG['Oran'] = ((TURSG['Close'] / TURSG['previous_days_stock_price'])-1)
+
+#########################       ÜLKER Bisküvi Sanayi A.Ş. (ULKER.IS)       #########################
+
+stocksymbols = ['ULKER.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+ULKER=pd.DataFrame(data1)
+ULKER = ULKER[['Close']]
+
+ULKER['Stock Name'] = 'ÜLKER Bisküvi Sanayi A.Ş.'
+ULKER['Stock Code'] = 'ULKER'
+
+ULKER['Close Today'] = ULKER['Close'].iloc[-1]
+ULKER.reset_index(inplace=True)
+ULKER['Date'] = pd.to_datetime(ULKER['Date']).dt.date
+ULKER["previous_days_stock_price"] = ULKER["Close"].shift(1)
+ULKER['Oran'] = ((ULKER['Close'] / ULKER['previous_days_stock_price'])-1)
+
+#########################       TÜRKİYE Vakıflar Bankası TAO (VAKBN.IS)       #########################
+
+stocksymbols = ['VAKBN.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+VAKBN=pd.DataFrame(data1)
+VAKBN = VAKBN[['Close']]
+
+VAKBN['Stock Name'] = 'TÜRKİYE Vakıflar Bankası TAO'
+VAKBN['Stock Code'] = 'VAKBN'
+
+VAKBN['Close Today'] = VAKBN['Close'].iloc[-1]
+VAKBN.reset_index(inplace=True)
+VAKBN['Date'] = pd.to_datetime(VAKBN['Date']).dt.date
+VAKBN["previous_days_stock_price"] = VAKBN["Close"].shift(1)
+VAKBN['Oran'] = ((VAKBN['Close'] / VAKBN['previous_days_stock_price'])-1)
+
+#########################       VERUSA Holding A.Ş. (VERUS.IS)       #########################
+
+stocksymbols = ['VERUS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+VERUS=pd.DataFrame(data1)
+VERUS = VERUS[['Close']]
+
+VERUS['Stock Name'] = 'VERUSA Holding A.Ş.'
+VERUS['Stock Code'] = 'VERUS'
+
+VERUS['Close Today'] = VERUS['Close'].iloc[-1]
+VERUS.reset_index(inplace=True)
+VERUS['Date'] = pd.to_datetime(VERUS['Date']).dt.date
+VERUS["previous_days_stock_price"] = VERUS["Close"].shift(1)
+VERUS['Oran'] = ((VERUS['Close'] / VERUS['previous_days_stock_price'])-1)
+
+#########################       VESTEL Elektronik Sanayi ve Ticaret A.Ş. (VESTL.IS)       #########################
+
+stocksymbols = ['VESTL.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+VESTL=pd.DataFrame(data1)
+VESTL = VESTL[['Close']]
+
+VESTL['Stock Name'] = 'VESTEL Elektronik Sanayi ve Ticaret A.Ş.'
+VESTL['Stock Code'] = 'VESTL'
+
+VESTL['Close Today'] = VESTL['Close'].iloc[-1]
+VESTL.reset_index(inplace=True)
+VESTL['Date'] = pd.to_datetime(VESTL['Date']).dt.date
+VESTL["previous_days_stock_price"] = VESTL["Close"].shift(1)
+VESTL['Oran'] = ((VESTL['Close'] / VESTL['previous_days_stock_price'])-1)
+
+#########################       VESTEL Beyaz Eşya Sanayi ve Ticaret A.Ş. (VESBE.IS)       #########################
+
+stocksymbols = ['VESBE.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+VESBE=pd.DataFrame(data1)
+VESBE = VESBE[['Close']]
+
+VESBE['Stock Name'] = 'VESTEL Beyaz Eşya Sanayi ve Ticaret A.Ş.'
+VESBE['Stock Code'] = 'VESBE'
+
+VESBE['Close Today'] = VESBE['Close'].iloc[-1]
+VESBE.reset_index(inplace=True)
+VESBE['Date'] = pd.to_datetime(VESBE['Date']).dt.date
+VESBE["previous_days_stock_price"] = VESBE["Close"].shift(1)
+VESBE['Oran'] = ((VESBE['Close'] / VESBE['previous_days_stock_price'])-1)
+
+#########################       YAPI ve Kredi Bankası A.Ş. (YKBNK.IS)       #########################
+
+stocksymbols = ['YKBNK.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+YKBNK=pd.DataFrame(data1)
+YKBNK = YKBNK[['Close']]
+
+YKBNK['Stock Name'] = 'YAPI ve Kredi Bankası A.Ş.'
+YKBNK['Stock Code'] = 'YKBNK'
+
+YKBNK['Close Today'] = YKBNK['Close'].iloc[-1]
+YKBNK.reset_index(inplace=True)
+YKBNK['Date'] = pd.to_datetime(YKBNK['Date']).dt.date
+YKBNK["previous_days_stock_price"] = YKBNK["Close"].shift(1)
+YKBNK['Oran'] = ((YKBNK['Close'] / YKBNK['previous_days_stock_price'])-1)
+
+#########################       YATAŞ Yatak ve Yorgan Sanayi Ticaret A.Ş. (YATAS.IS)       #########################
+
+stocksymbols = ['YATAS.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+YATAS=pd.DataFrame(data1)
+YATAS = YATAS[['Close']]
+
+YATAS['Stock Name'] = 'YATAŞ Yatak ve Yorgan Sanayi Ticaret A.Ş.'
+YATAS['Stock Code'] = 'YATAS'
+
+YATAS['Close Today'] = YATAS['Close'].iloc[-1]
+YATAS.reset_index(inplace=True)
+YATAS['Date'] = pd.to_datetime(YATAS['Date']).dt.date
+YATAS["previous_days_stock_price"] = YATAS["Close"].shift(1)
+YATAS['Oran'] = ((YATAS['Close'] / YATAS['previous_days_stock_price'])-1)
+
+#########################       YAYLA Agro Gıda Sanayi ve Ticaret A.Ş. (YYLGD.IS)       #########################
+
+stocksymbols = ['YYLGD.IS']
+def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
+    data1 = web.get_data_yahoo(stocks , data_source='yahoo' , start = start ,end= end )
+    return data1
+data1 = getMyPortfolio(stocksymbols)
+
+YYLGD=pd.DataFrame(data1)
+YYLGD = YYLGD[['Close']]
+
+YYLGD['Stock Name'] = 'YAYLA Agro Gıda Sanayi ve Ticaret A.Ş.'
+YYLGD['Stock Code'] = 'YYLGD'
+
+YYLGD['Close Today'] = YYLGD['Close'].iloc[-1]
+YYLGD.reset_index(inplace=True)
+YYLGD['Date'] = pd.to_datetime(YYLGD['Date']).dt.date
+YYLGD["previous_days_stock_price"] = YYLGD["Close"].shift(1)
+YYLGD['Oran'] = ((YYLGD['Close'] / YYLGD['previous_days_stock_price'])-1)
+
+All_Stock = ADESE.append([AGHOL, AGHOL,AKBNK,AKFGY,AKSEN,ALGYO,ALARK,ALBRK,
+					   AKSA,ALKIM,AEFES,ARCLK,ASELS,AYDEM,BAGFS,BERA,BIMAS,
+					   BRYAT,BUCIM,CEMAS,CEMTS,CIMSA,CCOLA,DEVA,DOHOL,DOAS,
+					   EGEEN,ECILC,EKGYO,ENKAI,ERBOS,EREGL,FROTO,GARAN,GLYHO,
+					   GOZDE,GUBRF,HEKTS,IZMDC,IPEKE,ISFIN,ISGYO,ISMEN,ISDMR,KRDMD,
+					   KARSN,KARTN,KERVT,KCHOL,KORDS,KOZAL,KOZAA,LOGO,MAVI,MGROS,
+					   NTHOL,ODAS,OTKAR,OYAKC,PGSUS,PETKM,QUAGR,RTALB,SAHOL,SARKY,
+					   SASA,SKBNK,SELEC,SISE,SOKM,TAVHL,TKFEN,THYAO,TOASO,TRGYO,
+					   TSPOR,TSKB,TUKAS,TMSN,TUPRS,PRKAB,TTKOM,TTRAK,TCELL,HALKB,
+					   ISCTR,TURSG,ULKER,VAKBN,VERUS,VESTL,VESBE,YKBNK,YATAS,YYLGD])
+
+All_Stock['Moving Average 2'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(2, 1).mean())
+All_Stock['Moving Average 3'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(3, 1).mean())
+All_Stock['Moving Average 4'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(4, 1).mean())
+All_Stock['Moving Average 5'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(5, 1).mean())
+All_Stock['Moving Average 6'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(6, 1).mean())
+All_Stock['Moving Average 7'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(7, 1).mean())
+All_Stock['Moving Average 8'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(8, 1).mean())
+All_Stock['Moving Average 9'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(9, 1).mean())
+All_Stock['Moving Average 10'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(10, 1).mean())
+All_Stock['Moving Average 11'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(11, 1).mean())
+All_Stock['Moving Average 12'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(12, 1).mean())
+All_Stock['Moving Average 13'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(13, 1).mean())
+All_Stock['Moving Average 14'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(14, 1).mean())
+All_Stock['Moving Average 15'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(15, 1).mean())
+
+All_Stock['Moving Max 2'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(2, 1).max())
+All_Stock['Moving Max 3'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(3, 1).max())
+All_Stock['Moving Max 4'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(4, 1).max())
+All_Stock['Moving Max 5'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(5, 1).max())
+All_Stock['Moving Max 6'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(6, 1).max())
+All_Stock['Moving Max 7'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(7, 1).max())
+All_Stock['Moving Max 8'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(8, 1).max())
+All_Stock['Moving Max 9'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(9, 1).max())
+All_Stock['Moving Max 10'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(10, 1).max())
+All_Stock['Moving Max 11'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(11, 1).max())
+All_Stock['Moving Max 12'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(12, 1).max())
+All_Stock['Moving Max 13'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(13, 1).max())
+All_Stock['Moving Max 14'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(14, 1).max())
+All_Stock['Moving Max 15'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(15, 1).max())
+
+All_Stock['Moving Min 2'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(2, 1).min())
+All_Stock['Moving Min 3'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(3, 1).min())
+All_Stock['Moving Min 4'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(4, 1).min())
+All_Stock['Moving Min 5'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(5, 1).min())
+All_Stock['Moving Min 6'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(6, 1).min())
+All_Stock['Moving Min 7'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(7, 1).min())
+All_Stock['Moving Min 8'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(8, 1).min())
+All_Stock['Moving Min 9'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(9, 1).min())
+All_Stock['Moving Min 10'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(10, 1).min())
+All_Stock['Moving Min 11'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(11, 1).min())
+All_Stock['Moving Min 12'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(12, 1).min())
+All_Stock['Moving Min 13'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(13, 1).min())
+All_Stock['Moving Min 14'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(14, 1).min())
+All_Stock['Moving Min 15'] = All_Stock.groupby('Stock Name')['Close'].transform(lambda x: x.rolling(15, 1).min())
+
+All_Stock['Lag of Close 1'] = All_Stock.groupby(['Stock Name'])['Close'].shift(1)
+All_Stock['Lag of Close 2'] = All_Stock.groupby(['Stock Name'])['Close'].shift(2)
+All_Stock['Lag of Close 3'] = All_Stock.groupby(['Stock Name'])['Close'].shift(3)
+All_Stock['Lag of Close 4'] = All_Stock.groupby(['Stock Name'])['Close'].shift(4)
+All_Stock['Lag of Close 5'] = All_Stock.groupby(['Stock Name'])['Close'].shift(5)
+All_Stock['Lag of Close 6'] = All_Stock.groupby(['Stock Name'])['Close'].shift(6)
+All_Stock['Lag of Close 7'] = All_Stock.groupby(['Stock Name'])['Close'].shift(7)
+All_Stock['Lag of Close 8'] = All_Stock.groupby(['Stock Name'])['Close'].shift(8)
+All_Stock['Lag of Close 9'] = All_Stock.groupby(['Stock Name'])['Close'].shift(9)
+All_Stock['Lag of Close 10'] = All_Stock.groupby(['Stock Name'])['Close'].shift(10)
+All_Stock['Lag of Close 11'] = All_Stock.groupby(['Stock Name'])['Close'].shift(11)
+All_Stock['Lag of Close 12'] = All_Stock.groupby(['Stock Name'])['Close'].shift(12)
+All_Stock['Lag of Close 13'] = All_Stock.groupby(['Stock Name'])['Close'].shift(13)
+All_Stock['Lag of Close 14'] = All_Stock.groupby(['Stock Name'])['Close'].shift(14)
+All_Stock['Lag of Close 15'] = All_Stock.groupby(['Stock Name'])['Close'].shift(15)
+
+All_Stock['Lag Moving Average 2'] = All_Stock.groupby(['Stock Name'])['Moving Average 2'].shift(1)
+All_Stock['Lag Moving Average 3'] = All_Stock.groupby(['Stock Name'])['Moving Average 3'].shift(1)
+All_Stock['Lag Moving Average 4'] = All_Stock.groupby(['Stock Name'])['Moving Average 4'].shift(1)
+All_Stock['Lag Moving Average 5'] = All_Stock.groupby(['Stock Name'])['Moving Average 5'].shift(1)
+All_Stock['Lag Moving Average 6'] = All_Stock.groupby(['Stock Name'])['Moving Average 6'].shift(1)
+All_Stock['Lag Moving Average 7'] = All_Stock.groupby(['Stock Name'])['Moving Average 7'].shift(1)
+All_Stock['Lag Moving Average 8'] = All_Stock.groupby(['Stock Name'])['Moving Average 8'].shift(1)
+All_Stock['Lag Moving Average 9'] = All_Stock.groupby(['Stock Name'])['Moving Average 9'].shift(1)
+All_Stock['Lag Moving Average 10'] = All_Stock.groupby(['Stock Name'])['Moving Average 10'].shift(1)
+All_Stock['Lag Moving Average 11'] = All_Stock.groupby(['Stock Name'])['Moving Average 11'].shift(1)
+All_Stock['Lag Moving Average 12'] = All_Stock.groupby(['Stock Name'])['Moving Average 12'].shift(1)
+All_Stock['Lag Moving Average 13'] = All_Stock.groupby(['Stock Name'])['Moving Average 13'].shift(1)
+All_Stock['Lag Moving Average 14'] = All_Stock.groupby(['Stock Name'])['Moving Average 14'].shift(1)
+All_Stock['Lag Moving Average 15'] = All_Stock.groupby(['Stock Name'])['Moving Average 15'].shift(1)
+
+# Virgülden sonrasındaki belirli basamakları kaldırıyoruz.
+# Hareketli maksimum değeri
+All_Stock['Close'] = All_Stock['Close'].round(6)
+
+All_Stock['Moving Average 2'] = All_Stock['Moving Average 2'].round(6)
+All_Stock['Moving Average 3'] = All_Stock['Moving Average 3'].round(6)
+All_Stock['Moving Average 4'] = All_Stock['Moving Average 4'].round(6)
+All_Stock['Moving Average 5'] = All_Stock['Moving Average 5'].round(6)
+All_Stock['Moving Average 6'] = All_Stock['Moving Average 6'].round(6)
+All_Stock['Moving Average 7'] = All_Stock['Moving Average 7'].round(6)
+All_Stock['Moving Average 8'] = All_Stock['Moving Average 8'].round(6)
+All_Stock['Moving Average 9'] = All_Stock['Moving Average 9'].round(6)
+All_Stock['Moving Average 10'] = All_Stock['Moving Average 10'].round(6)
+All_Stock['Moving Average 11'] = All_Stock['Moving Average 11'].round(6)
+All_Stock['Moving Average 12'] = All_Stock['Moving Average 12'].round(6)
+All_Stock['Moving Average 13'] = All_Stock['Moving Average 13'].round(6)
+All_Stock['Moving Average 14'] = All_Stock['Moving Average 14'].round(6)
+All_Stock['Moving Average 15'] = All_Stock['Moving Average 15'].round(6)
+
+# Hareketli maksimum değeri
+All_Stock['Moving Max 2'] = All_Stock['Moving Max 2'].round(6)
+All_Stock['Moving Max 3'] = All_Stock['Moving Max 3'].round(6)
+All_Stock['Moving Max 4'] = All_Stock['Moving Max 4'].round(6)
+All_Stock['Moving Max 5'] = All_Stock['Moving Max 5'].round(6)
+All_Stock['Moving Max 6'] = All_Stock['Moving Max 6'].round(6)
+All_Stock['Moving Max 7'] = All_Stock['Moving Max 7'].round(6)
+All_Stock['Moving Max 8'] = All_Stock['Moving Max 8'].round(6)
+All_Stock['Moving Max 9'] = All_Stock['Moving Max 9'].round(6)
+All_Stock['Moving Max 10'] = All_Stock['Moving Max 10'].round(6)
+All_Stock['Moving Max 11'] = All_Stock['Moving Max 11'].round(6)
+All_Stock['Moving Max 12'] = All_Stock['Moving Max 12'].round(6)
+All_Stock['Moving Max 13'] = All_Stock['Moving Max 13'].round(6)
+All_Stock['Moving Max 14'] = All_Stock['Moving Max 14'].round(6)
+All_Stock['Moving Max 15'] = All_Stock['Moving Max 15'].round(6)
+
+# Hareketli minimum değeri
+All_Stock['Moving Min 2'] = All_Stock['Moving Min 2'].round(6)
+All_Stock['Moving Min 3'] = All_Stock['Moving Min 3'].round(6)
+All_Stock['Moving Min 4'] = All_Stock['Moving Min 4'].round(6)
+All_Stock['Moving Min 5'] = All_Stock['Moving Min 5'].round(6)
+All_Stock['Moving Min 6'] = All_Stock['Moving Min 6'].round(6)
+All_Stock['Moving Min 7'] = All_Stock['Moving Min 7'].round(6)
+All_Stock['Moving Min 8'] = All_Stock['Moving Min 8'].round(6)
+All_Stock['Moving Min 9'] = All_Stock['Moving Min 9'].round(6)
+All_Stock['Moving Min 10'] = All_Stock['Moving Min 10'].round(6)
+All_Stock['Moving Min 11'] = All_Stock['Moving Min 11'].round(6)
+All_Stock['Moving Min 12'] = All_Stock['Moving Min 12'].round(6)
+All_Stock['Moving Min 13'] = All_Stock['Moving Min 13'].round(6)
+All_Stock['Moving Min 14'] = All_Stock['Moving Min 14'].round(6)
+All_Stock['Moving Min 15'] = All_Stock['Moving Min 15'].round(6)
+
+# Hareketli ortalama değeri
+All_Stock['Lag of Close 1'] = All_Stock['Lag of Close 1'].round(6)
+All_Stock['Lag of Close 2'] = All_Stock['Lag of Close 2'].round(6)
+All_Stock['Lag of Close 3'] = All_Stock['Lag of Close 3'].round(6)
+All_Stock['Lag of Close 4'] = All_Stock['Lag of Close 4'].round(6)
+All_Stock['Lag of Close 5'] = All_Stock['Lag of Close 5'].round(6)
+All_Stock['Lag of Close 6'] = All_Stock['Lag of Close 6'].round(6)
+All_Stock['Lag of Close 7'] = All_Stock['Lag of Close 7'].round(6)
+All_Stock['Lag of Close 8'] = All_Stock['Lag of Close 8'].round(6)
+All_Stock['Lag of Close 9'] = All_Stock['Lag of Close 9'].round(6)
+All_Stock['Lag of Close 10'] = All_Stock['Lag of Close 10'].round(6)
+All_Stock['Lag of Close 11'] = All_Stock['Lag of Close 11'].round(6)
+All_Stock['Lag of Close 12'] = All_Stock['Lag of Close 12'].round(6)
+All_Stock['Lag of Close 13'] = All_Stock['Lag of Close 13'].round(6)
+All_Stock['Lag of Close 14'] = All_Stock['Lag of Close 14'].round(6)
+All_Stock['Lag of Close 15'] = All_Stock['Lag of Close 15'].round(6)
+
+# Lag SMA değerleri
+All_Stock['Lag Moving Average 2'] = All_Stock['Lag Moving Average 2'].round(6)
+All_Stock['Lag Moving Average 3'] = All_Stock['Lag Moving Average 3'].round(6)
+All_Stock['Lag Moving Average 4'] = All_Stock['Lag Moving Average 4'].round(6)
+All_Stock['Lag Moving Average 5'] = All_Stock['Lag Moving Average 5'].round(6)
+All_Stock['Lag Moving Average 6'] = All_Stock['Lag Moving Average 6'].round(6)
+All_Stock['Lag Moving Average 7'] = All_Stock['Lag Moving Average 7'].round(6)
+All_Stock['Lag Moving Average 8'] = All_Stock['Lag Moving Average 8'].round(6)
+All_Stock['Lag Moving Average 9'] = All_Stock['Lag Moving Average 9'].round(6)
+All_Stock['Lag Moving Average 10'] = All_Stock['Lag Moving Average 10'].round(6)
+All_Stock['Lag Moving Average 11'] = All_Stock['Lag Moving Average 11'].round(6)
+All_Stock['Lag Moving Average 12'] = All_Stock['Lag Moving Average 12'].round(6)
+All_Stock['Lag Moving Average 13'] = All_Stock['Lag Moving Average 13'].round(6)
+All_Stock['Lag Moving Average 14'] = All_Stock['Lag Moving Average 14'].round(6)
+All_Stock['Lag Moving Average 15'] = All_Stock['Lag Moving Average 15'].round(6)
+
+All_Stock.loc[(All_Stock['Close'] == All_Stock['Moving Min 2']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 3']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 4']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 5']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 6']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 7']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 8']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 9']) &
+          (All_Stock['Close'] == All_Stock['Moving Min 10']), 'Al Flag 1'] = 'Al'
+
+All_Stock.loc[(All_Stock['Close'] < All_Stock['Moving Average 2']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 3']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 4']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 5']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 6']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 7']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 8']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 9']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 10']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 11']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 12']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 13']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 14']) &
+          (All_Stock['Close'] < All_Stock['Moving Average 15']), 'Al Flag 2'] = 'Al'
+
+
+All_Stock.loc[(All_Stock['Close'] > All_Stock['Moving Average 5']), 'BugunTrendKontrol'] = 'Yukari'
+All_Stock.loc[(All_Stock["Close"] <=  All_Stock.groupby(['Stock Name'])['Close'].shift(1)), 'DunTrendKOntrol'] = 'Asagi'
+
+All_Stock.loc[(All_Stock['Close'] == All_Stock['Moving Max 2']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 3']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 4']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 5']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 6']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 7']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 8']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 9']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 10']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 11']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 12']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 13']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 14']) &
+          (All_Stock['Close'] == All_Stock['Moving Max 15']), 'Sat Flag 1'] = 'Sat'
+
+All_Stock.loc[(All_Stock['Close'] > All_Stock['Moving Average 2']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 3']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 4']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 5']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 6']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 7']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 8']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 9']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 10']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 11']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 12']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 13']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 14']) &
+          (All_Stock['Close'] > All_Stock['Moving Average 15']), 'Sat Flag 2'] = 'Sat'
+
+
+def condition1(All_Stock):
+    if ((All_Stock['Al Flag 1'] == 'Al') and (All_Stock['Al Flag 2'] == 'Al')):
+        return "Al (Seviye 3)"
+    elif ((All_Stock['Al Flag 1'] == 'Al') and (All_Stock['Al Flag 2'] != 'Al')):
+        return "Al (Seviye 2)"
+    elif ((All_Stock['Al Flag 1'] != 'Al') and (All_Stock['Al Flag 2'] == 'Al')):
+        return "Al (Seviye 1)"
+    elif ((All_Stock['Sat Flag 1'] == 'Sat') and (All_Stock['Sat Flag 2'] == 'Sat')):
+        return "Sat (Seviye 3)"
+    elif ((All_Stock['Sat Flag 1'] != 'Sat') and (All_Stock['Sat Flag 2'] == 'Sat')):
+        return "Al (Seviye 2)"
+    elif ((All_Stock['Sat Flag 1'] == 'Sat') and (All_Stock['Sat Flag 2'] != 'Sat')):
+        return "Sat (Seviye 1)"
+    else :
+        return "Bekle"
+
+All_Stock['YFlag'] = All_Stock.apply(condition1, axis = 1)
+
+def condition1(All_Stock):
+    if ((All_Stock['BugunTrendKontrol'] == 'Yukari') & (All_Stock['DunTrendKOntrol']=='Asagi')):
+        return "Al"
+    else :
+        return "Sat"
+
+All_Stock['TKontrol'] = All_Stock.apply(condition1, axis = 1)
+
+All_Stock=All_Stock[['Date', 'Stock Name', 'Stock Code', 'Close', 'Close Today', 'Oran', 'YFlag', 'TKontrol']]
+
+All_Stock.to_excel (r'/home/xxyyxxyy/All_Stocks.xlsx', index = False, header=True)
+
+Stock_List = All_Stock[['Stock Name','Stock Code']]
+Distinct_Stock_List = Stock_List.drop_duplicates(subset = ["Stock Name", "Stock Code"])
+
+Distinct_Stock_List.to_excel (r'/home/xxyyxxyy/List_of_Stocks.xlsx', index = False, header=True)
+
+LastDateAll = All_Stock[(All_Stock['Date'] == (end_date - timedelta(days = 1)))]
+
+LastDateAll = LastDateAll.sort_values(['Stock Name', 'Date'])
+
+LastDateAll.to_excel (r'/home/xxyyxxyy/Current_Status_of_All_Stocks.xlsx', index = False, header=True)
+
+LastDateSatF1 = LastDateAll.query('YFlag == "Al (Seviye 1)" or YFlag == "Al (Seviye 2)" or YFlag == "Al (Seviye 3)"')
+
+LastDateSatF1.to_excel (r'/home/xxyyxxyy/All_Stocks_Giving_Buy_Today_Flag1.xlsx', index = False, header=True)
+
+LastDateSatF1 = LastDateAll.query('YFlag == "Sat (Seviye 1)" or YFlag == "Sat (Seviye 2)" or YFlag == "Sat (Seviye 3)"')
+
+LastDateSatF1.to_excel (r'/home/xxyyxxyy/All_Stocks_Giving_Sell_Today_Flag1.xlsx', index = False, header=True)
+
+LastDateSatF2 = LastDateAll.query('TKontrol == "Al"')
+
+LastDateSatF2.to_excel (r'/home/xxyyxxyy/All_Stocks_Giving_Buy_Today_Flag2.xlsx', index = False, header=True)
+
+LastDateSatF2 = LastDateAll.query('TKontrol == "Sat (Seviye 1)" or TKontrol == "Sat (Seviye 2)" or TKontrol == "Sat (Seviye 3)"')
+
+LastDateSatF2.to_excel (r'/home/xxyyxxyy/All_Stocks_Giving_Sell_Today_Flag2.xlsx', index = False, header=True)
+
+TenDays = All_Stock[(All_Stock['Date'] >= (end_date - timedelta(days = 14)))]
+
+TenDays = TenDays.sort_values(['Stock Name', 'Date'])
+
+TenDays.to_excel (r'/home/xxyyxxyy/Status_of_Stocks_for_the_Last_Ten_Days.xlsx', index = False, header=True)
+
+import zipfile
+with zipfile.ZipFile("/home/xxyyxxyy/arsiv.zip","w") as z:
+    z.write(r"/home/xxyyxxyy/All_Stocks.xlsx")
+    z.write(r"/home/xxyyxxyy/List_of_Stocks.xlsx")
+    z.write(r"/home/xxyyxxyy/Current_Status_of_All_Stocks.xlsx")
+    z.write(r"/home/xxyyxxyy/All_Stocks_Giving_Buy_Today_Flag1.xlsx")
+    z.write(r"/home/xxyyxxyy/All_Stocks_Giving_Buy_Today_Flag2.xlsx")
+    z.write(r"/home/xxyyxxyy/All_Stocks_Giving_Sell_Today_Flag1.xlsx")
+    z.write(r"/home/xxyyxxyy/All_Stocks_Giving_Sell_Today_Flag2.xlsx")
+    z.write(r"/home/xxyyxxyy/Status_of_Stocks_for_the_Last_Ten_Days.xlsx")
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
+fromaddr = 'sender@gmail.com'
+toaddr = 'to@gmail.com'
+
+# instance of MIMEMultipart
+msg = MIMEMultipart()
+
+# storing the senders email address
+msg['From'] = fromaddr
+
+# storing the receivers email address
+msg['To'] = toaddr
+
+# storing the subject
+msg['Subject'] = "Black Bullock Python Edition"
+
+# string to store the body of the mail
+body = "Selamlar. \n\nProje kapsamı dahilinde gönderilen ilgili mail Pazar ve Pazartesi saat 00:00 ila 02:00 saatlerinde gönderildiği takdirde dikkate almayınız. İlgili hesapta oluşturduğumuz bu task 01-01-2023 tarihinde yenilenmek üzere çalıştırılmaktadır. \n\nAnlayışınız için teşekkürler. \nİyi Akşamlar."
+
+# attach the body with the msg instance
+msg.attach(MIMEText(body, 'plain'))
+
+# open the file to be sent
+filename = "arsiv.zip"
+attachment = open("/home/xxyyxxyy/arsiv.zip", "rb")
+
+# instance of MIMEBase and named as p
+p = MIMEBase('application', 'octet-stream')
+
+# To change the payload into encoded form
+p.set_payload((attachment).read())
+
+# encode into base64
+encoders.encode_base64(p)
+
+p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+# attach the instance 'p' to instance 'msg'
+msg.attach(p)
+
+# creates SMTP session
+s = smtplib.SMTP('smtp.gmail.com', 587)
+
+# start TLS for security
+s.starttls()
+
+# Authentication
+s.login(fromaddr, "aajttbmyjbzhdygq")
+
+# Converts the Multipart msg into a string
+text = msg.as_string()
+
+# sending the mail
+s.sendmail(fromaddr, toaddr, text)
+
+# terminating the session
+s.quit()
